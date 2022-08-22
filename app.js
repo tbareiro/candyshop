@@ -97,3 +97,36 @@ function pagos(){
 }
 
 pagos();
+
+let titulo1 = document.getElementById("producto1-titulo")
+titulo1.innerText = producto1.nombre
+
+let titulo2 = document.getElementById("producto2-titulo")
+titulo2.innerText = producto2.nombre
+
+let titulo3 = document.getElementById("producto3-titulo")
+titulo3.innerText = producto3.nombre
+
+let precio1 = document.getElementById("producto1-precio")
+precio1.innerText = producto1.precio
+
+let precio2 = document.getElementById("producto2-precio")
+precio2.innerText = producto2.precio
+
+let precio3 = document.getElementById("producto3-precio")
+precio3.innerText = producto3.precio
+
+
+let boton = document.getElementsByTagName("button")
+
+for (i = 0; i < boton.length; i++) {
+    boton[i].addEventListener("click", agregar);
+}
+
+function agregar(){
+    carrito.push("Item")
+    console.log(carrito)
+    let parrafo = document.createElement("p")
+    parrafo.innerText = "Agregado al carrito!"
+    document.body.append(parrafo)
+}
