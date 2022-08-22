@@ -23,7 +23,7 @@ function sumaProducto1(){
 }
 
 function sumaProducto2(){
-    let opcion = confirm("Queres agregar el producto 1? El valor es de $"+producto2.precio+" y contiene: "+producto2.contenido+".")
+    let opcion = confirm("Queres agregar "+producto2.nombre+"? El valor es de $"+producto2.precio+" y contiene: "+producto2.contenido+".")
     if(opcion == true){
         total = total + producto2.precio;
         carrito.push(producto2.contenido)
@@ -32,7 +32,7 @@ function sumaProducto2(){
 }
 
 function sumaProducto3(){
-    let opcion = confirm("Queres agregar el producto 1? El valor es de $"+producto3.precio+" y contiene: "+producto3.contenido+".")
+    let opcion = confirm("Queres agregar "+producto3.nombre+"? El valor es de $"+producto3.precio+" y contiene: "+producto3.contenido+".")
     if(opcion == true){
         total = total + producto3.precio;
         carrito.push(producto3.contenido)
