@@ -1,21 +1,12 @@
-#producto1{
-    background-color: tomato;
-    width: 400px;
+.div-products{
+    width: 30%;
+    background-color: orange;
 }
 
-#producto2{
-    background-color: aquamarine;
-    width: 400px;
-}
-
-#producto3{
-    background-color: yellow;
-    width: 400px;
-}
-
-#carrito{
+.div-carrito{
     background-color: hotpink;
     width: 400px;
+    height: 150px;
     margin-top: 10px;
 }
 
