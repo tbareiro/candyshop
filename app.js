@@ -12,6 +12,7 @@ let producto3 = new Productos({nombre: "Bolsa de 600gr de gomitas", precio: 750,
 let carrito = []
 let total = 0
 let totalCarrito = document.getElementById("total")
+const descuentos = ["descuento1", "descuento2", "descuento3"]
 
 let titulo1 = document.getElementById("producto1-titulo")
 titulo1.innerText = producto1.nombre
@@ -63,6 +64,16 @@ function agregar3(){
     totalCarrito.innerText = "El total es: $"+ total 
 }
 
+
+let codigo = document.getElementById("codigo")
+codigo.addEventListener("click", codigoPromo)
+
+function codigoPromo(codigo){
+    if (descuentos.includes(codigo) === true){
+        alert("Codigo Válido")
+        total = total * 0.9
+}}
+
 let botonPago = document.getElementById("pago")
 botonPago.addEventListener("click", envio)
 
@@ -81,4 +92,9 @@ function envio(){
         textoEnvio = document.getElementById("costo-envio")
         textoEnvio.innerText = "Contas con envio gratis en esta compra!"
     }
+}
+
+let codigoIngresado = document.getElementById("codigo")
+if (descuentos.includes(codigoIngresado.addEventListener)){
+    total = total * 0
 }
