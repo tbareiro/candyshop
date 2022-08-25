@@ -66,13 +66,18 @@ function agregar3(){
 
 
 let codigo = document.getElementById("codigo")
-codigo.addEventListener("click", codigoPromo)
+codigo.addEventListener("submit", codigoPromo(e))
 
-function codigoPromo(codigo){
-    if (descuentos.includes(codigo) === true){
-        alert("Codigo Válido")
+function codigoPromo(e){
+    e.preventDefault()
+    let promo = e.target
+    if (descuentos.includes(promo.value) === true){
+        alert("Codigo Valido")
         total = total * 0.9
-}}
+    } else {
+        alert("Codigo Invalido")
+    }
+}
 
 let botonPago = document.getElementById("pago")
 botonPago.addEventListener("click", envio)
@@ -92,9 +97,4 @@ function envio(){
         textoEnvio = document.getElementById("costo-envio")
         textoEnvio.innerText = "Contas con envio gratis en esta compra!"
     }
-}
-
-let codigoIngresado = document.getElementById("codigo")
-if (descuentos.includes(codigoIngresado.addEventListener)){
-    total = total * 0
 }
