@@ -6,7 +6,7 @@
 .div-carrito{
     background-color: hotpink;
     width: 400px;
-    height: 150px;
+    height: auto;
     margin-top: 10px;
 }
 
