@@ -1,6 +1,8 @@
 .div-products{
     width: 30%;
     background-color: orange;
+    margin-bottom: 10px;
+    padding: 8px;
 }
 
 .div-carrito{

@@ -72,10 +72,10 @@ function codigoPromo(e){
     e.preventDefault()
     let promo = e.target
     let descuentos = localStorage.getItem("descuentos")
-    alert(promo)
-    if (descuentos.includes(promo.value[0])){
+    if (descuentos.includes(promo.children[0].value)){
         alert("Codigo Valido")
         total = total * 0.9
+        totalCarrito.innerText = "El total es: $"+ total
     } else {
         alert("Codigo Invalido")
     }
