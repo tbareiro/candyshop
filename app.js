@@ -43,6 +43,12 @@ function agregar1(){
     carritoContainer.innerText = carrito
     total = total + producto1.precio
     totalCarrito.innerText = "El total es: $"+ total 
+    Toastify({
+        text: "Producto agregado al carrito!",
+        duration: 3000,
+        gravity: "bottom",
+        position: "right"
+    }).showToast()
 }
 
 let boton2 = document.getElementById("button2")
@@ -50,6 +56,12 @@ boton2.addEventListener("click", agregar2)
 
 function agregar2(){
     carrito.push(producto2.nombre)
+    Toastify({
+        text: "Producto agregado al carrito!",
+        duration: 1500,
+        gravity: "bottom",
+        position: "right"
+    }).showToast()
     carritoContainer.innerText = carrito
     total = total + producto2.precio
     totalCarrito.innerText = "El total es: $"+ total 
@@ -60,6 +72,12 @@ boton3.addEventListener("click", agregar3)
 
 function agregar3(){
     carrito.push(producto3.nombre)
+    Toastify({
+        text: "Producto agregado al carrito!",
+        duration: 1500,
+        gravity: "bottom",
+        position: "right"
+    }).showToast()
     carritoContainer.innerText = carrito
     total = total + producto3.precio
     totalCarrito.innerText = "El total es: $"+ total 
@@ -72,32 +90,30 @@ function codigoPromo(e){
     e.preventDefault()
     let promo = e.target
     let descuentos = localStorage.getItem("descuentos")
-    if (descuentos.includes(promo.children[0].value)){
-        alert("Codigo Valido")
-        total = total * 0.9
-        totalCarrito.innerText = "El total es: $"+ total
-    } else {
-        alert("Codigo Invalido")
-    }
+    descuentos.includes(promo.children[0].value) == true ?  (total = total * 0.9) && alert("Codigo Valido! Tenes un 10% de descuento"): alert("Codigo Invalido")
+    totalCarrito.innerText = "El total es: $" + total
 }
 
 let botonPago = document.getElementById("pago")
 botonPago.addEventListener("click", envio)
 
-
-
 function envio(){
-    if(total == 0){
-        alert ("Aun no has sumado nada al carrito!")
-    } else if(total <= 1999){
-        let costoEnvio = 300
-        total = total + costoEnvio
-        alert("Se sumaran $300 de envio. La compra minima para el envio gratis es de $1999.")
-        totalCarrito.innerText = "El total es: $"+ total
-    } else {
-        let costoEnvio = 0
-        total = total + costoEnvio
-        textoEnvio = document.getElementById("costo-envio")
-        textoEnvio.innerText = "Contas con envio gratis en esta compra!"
-    }
+    total == 0 ? swal({
+        title: "Error", 
+        text: "No has agregado nada al carrito!",
+        icon: "error",
+        confirmButtonText: "Ok"
+    }) : (total <= 1999 ? (total = total + 300) && (swal({
+        title: "Envío", 
+        text: "Se sumaran $300 de envio. La compra minima para el envio gratis es de $1999.",
+        icon: "info",
+        confirmButtonText: "Ok"
+    })) : swal({
+        title: "Envío gratis!", 
+        text: "Perfecto! Contás con envío gratis!",
+        icon: "success",
+        confirmButtonText: "Ok"
+    }))
+    textoEnvio = document.getElementById("costo-envio")
+    totalCarrito.innerText = "El total es: $"+ total
 }
