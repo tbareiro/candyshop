@@ -90,7 +90,15 @@ function codigoPromo(e){
     e.preventDefault()
     let promo = e.target
     let descuentos = localStorage.getItem("descuentos")
-    descuentos.includes(promo.children[0].value) == true ?  (total = total * 0.9) && alert("Codigo Valido! Tenes un 10% de descuento"): alert("Codigo Invalido")
+    descuentos.includes(promo.children[0].value) == true ?  (total = total * 0.9) && swal({
+        title: "Descuento Válido", 
+        text: "El código de descuento es válido! Tenés un 10% de descuento.",
+        icon: "success",
+    }) : swal({
+        title: "Error", 
+        text: "El código de descuento no es válido.",
+        icon: "error",
+    })
     totalCarrito.innerText = "El total es: $" + total
 }
 

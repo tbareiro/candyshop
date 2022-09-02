@@ -10,24 +10,30 @@
     <link href="./styles.css" rel="stylesheet">
 </head>
 <body>
-    <header></header>
+    <header>
+        <div class="container-fluid">
+            <div class="logo">
+                <img src="./resources/candy-logo.jpg">
+            </div>
+        </div>
+    </header>
     <main>
         <div class="container">
             <div class="row justify-content-around">
-                <div class="div-products"><p id="producto1-titulo">titulo</p><p id="producto1-precio">precio</p><button id="button1">Agregar al carrito</button></div>
-                <div class="div-products"><p id="producto2-titulo">titulo</p><p id="producto2-precio">precio</p><button id="button2">Agregar al carrito</button></div>
-                <div class="div-products"><p id="producto3-titulo">titulo</p><p id="producto3-precio">precio</p><button id="button3">Agregar al carrito</button></div>
+                <div class="products"><p id="producto1-titulo">titulo</p><p id="producto1-precio">precio</p><button id="button1">Agregar al carrito</button></div>
+                <div class="products"><p id="producto2-titulo">titulo</p><p id="producto2-precio">precio</p><button id="button2">Agregar al carrito</button></div>
+                <div class="products"><p id="producto3-titulo">titulo</p><p id="producto3-precio">precio</p><button id="button3">Agregar al carrito</button></div>
             </div>
         </div>
         <div class="container">
             <div class="row justify-content-center">
-                <div>
+                <div class="form col">
                     <form id="codigo">
                         <input type="text" placeholder="Insertar codigo promocional"><br><br>
                         <input type="submit" value="Enviar">
                     </form>
                 </div>
-                <div class="div-carrito"><strong>Carrito</strong><p id="carrito"></p><p id="total">El total es: </p><p id="costo-envio"></p>
+                <div class="div-carrito col"><strong>Carrito</strong><p id="carrito"></p><p id="total">El total es: </p><p id="costo-envio"></p>
                 <button id="pago">Calcular Envio</button></div>
             </div>
         </div>

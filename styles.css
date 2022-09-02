@@ -1,4 +1,4 @@
-.div-products{
+div .products{
     width: 30%;
     background-color: orange;
     margin-bottom: 10px;
@@ -12,3 +12,14 @@
     margin-top: 10px;
 }
 
+header{
+    background-color: hotpink;
+}
+
+.logo img{
+    width: 200px;
+}
+
+div .form {
+    background-color: aquamarine;
+}
