@@ -1,18 +1,32 @@
 
-function Productos(product) {
-    this.nombre = product.nombre;
-    this.precio = product.precio;
-    this.contenido = product.contenido;
+function Productos(nombre, precio, contenido) {
+    this.nombre = nombre;
+    this.precio = precio;
+    this.contenido = contenido;
 }
-
-let producto1 = new Productos({nombre: "Bolsa de 800gr de chupetines", precio: 500, contenido: "800gr chupetines"})
-let producto2 = new Productos({nombre: "Mistery Candy Box", precio: 1190, contenido: "300gr chupetines, 500gr gomitas, 300gr caramelos masticables"})
-let producto3 = new Productos({nombre: "Bolsa de 600gr de gomitas", precio: 750, contenido: "600gr gomitas"})
 
 localStorage.setItem("carrito", [])
 localStorage.setItem("descuentos", ["descuento1", "descuento2", "descuento3"])
 let total = 0
 let totalCarrito = document.getElementById("total")
+
+function setting(){
+    let producto1 = new Productos("Bolsa de 800gr de chupetines", 500, "800gr chupetines")
+    let producto2 = new Productos("Mistery Candy Box", 1190, "300gr chupetines, 500gr gomitas, 300gr caramelos masticables")
+    let producto3 = new Productos("Bolsa de 600gr de gomitas", 750, "600gr gomitas")
+    let res = [producto1, producto2, producto3]
+    localStorage.setItem("products", res)
+}
+
+setting()
+
+let allProducts = JSON.parse(localStorage.getItem("products"))
+allProducts.forEach(imprimir(el))
+
+function imprimir(el){ 
+    let catalogo = document.getElementById("catalogo")
+    catalogo.innerHTML = `<div><h4>${el.nombre}</h4><h5>${el.precio}</h5><p>Incluye${el.contenido}</p></div>`
+}
 
 let titulo1 = document.getElementById("producto1-titulo")
 titulo1.innerText = producto1.nombre
