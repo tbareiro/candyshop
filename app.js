@@ -10,41 +10,38 @@ localStorage.setItem("descuentos", ["descuento1", "descuento2", "descuento3"])
 let total = 0
 let totalCarrito = document.getElementById("total")
 
-function setting(){
+function generarCatalogo(){
     let producto1 = new Productos("Bolsa de 800gr de chupetines", 500, "800gr chupetines")
     let producto2 = new Productos("Mistery Candy Box", 1190, "300gr chupetines, 500gr gomitas, 300gr caramelos masticables")
     let producto3 = new Productos("Bolsa de 600gr de gomitas", 750, "600gr gomitas")
-    let res = [producto1, producto2, producto3]
-    localStorage.setItem("products", res)
+    let products = [producto1, producto2, producto3]
+    localStorage.setItem("products", products)
 }
 
-setting()
+generarCatalogo()
 
-let allProducts = JSON.parse(localStorage.getItem("products"))
-allProducts.forEach(imprimir(el))
+let catalogo = document.getElementById("catalogo")
+let allProducts = localStorage.getItem("products")
+Array.from(allProducts).forEach(element => {console.log(element)
+    catalogo.innerHTML = `<h4>${element.nombre}</h4><h5>${element.precio}</h5><p>Incluye${element.contenido}</p>`})
 
-function imprimir(el){ 
-    let catalogo = document.getElementById("catalogo")
-    catalogo.innerHTML = `<div><h4>${el.nombre}</h4><h5>${el.precio}</h5><p>Incluye${el.contenido}</p></div>`
-}
+//let titulo1 = document.getElementById("producto1-titulo")
+//titulo1.innerText = producto1.nombre
 
-let titulo1 = document.getElementById("producto1-titulo")
-titulo1.innerText = producto1.nombre
+//let titulo2 = document.getElementById("producto2-titulo")
+//titulo2.innerText = producto2.nombre
 
-let titulo2 = document.getElementById("producto2-titulo")
-titulo2.innerText = producto2.nombre
+//let titulo3 = document.getElementById("producto3-titulo")
+//titulo3.innerText = producto3.nombre
 
-let titulo3 = document.getElementById("producto3-titulo")
-titulo3.innerText = producto3.nombre
+//let precio1 = document.getElementById("producto1-precio")
+//precio1.innerText = producto1.precio
 
-let precio1 = document.getElementById("producto1-precio")
-precio1.innerText = producto1.precio
+//let precio2 = document.getElementById("producto2-precio")
+//precio2.innerText = producto2.precio
 
-let precio2 = document.getElementById("producto2-precio")
-precio2.innerText = producto2.precio
-
-let precio3 = document.getElementById("producto3-precio")
-precio3.innerText = producto3.precio
+//let precio3 = document.getElementById("producto3-precio")
+//precio3.innerText = producto3.precio
 
 let carritoContainer = document.getElementById("carrito")
 let carrito = localStorage.getItem("carrito").split(",")
