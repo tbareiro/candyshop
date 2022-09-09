@@ -9,21 +9,18 @@ localStorage.setItem("carrito", [])
 localStorage.setItem("descuentos", ["descuento1", "descuento2", "descuento3"])
 let total = 0
 let totalCarrito = document.getElementById("total")
-
-function generarCatalogo(){
-    let producto1 = new Productos("Bolsa de 800gr de chupetines", 500, "800gr chupetines")
-    let producto2 = new Productos("Mistery Candy Box", 1190, "300gr chupetines, 500gr gomitas, 300gr caramelos masticables")
-    let producto3 = new Productos("Bolsa de 600gr de gomitas", 750, "600gr gomitas")
-    let products = [producto1, producto2, producto3]
-    localStorage.setItem("products", products)
-}
-
-generarCatalogo()
+let producto1 = new Productos("Bolsa de 800gr de chupetines", 500, "800gr chupetines")
+let producto2 = new Productos("Mistery Candy Box", 1190, "300gr chupetines, 500gr gomitas, 300gr caramelos masticables")
+let producto3 = new Productos("Bolsa de 600gr de gomitas", 750, "600gr gomitas")
+const products = [producto1, producto2, producto3]
+localStorage.setItem("products", products)
 
 let catalogo = document.getElementById("catalogo")
-let allProducts = localStorage.getItem("products")
-Array.from(allProducts).forEach(element => {console.log(element)
-    catalogo.innerHTML = `<h4>${element.nombre}</h4><h5>${element.precio}</h5><p>Incluye${element.contenido}</p>`})
+function generarCatalogo(){
+    products.forEach(element => {catalogo.innerHTML = `<div><h4>${element.nombre}</h4><h5>$${element.precio}</h5><p>Incluye: ${element.contenido}</p></div>`
+    console.log (element)})}
+
+generarCatalogo()
 
 //let titulo1 = document.getElementById("producto1-titulo")
 //titulo1.innerText = producto1.nombre
