@@ -12,42 +12,27 @@ let totalCarrito = document.getElementById("total")
 let producto1 = new Productos("Bolsa de 800gr de chupetines", 500, "800gr chupetines")
 let producto2 = new Productos("Mistery Candy Box", 1190, "300gr chupetines, 500gr gomitas, 300gr caramelos masticables")
 let producto3 = new Productos("Bolsa de 600gr de gomitas", 750, "600gr gomitas")
-const products = [producto1, producto2, producto3]
+let producto4 = new Productos("Chocolate Cadbury", 590, "1 chocolate relleno frutilla 300gr")
+const products = [producto1, producto2, producto3, producto4]
 localStorage.setItem("products", products)
 
 let catalogo = document.getElementById("catalogo")
 function generarCatalogo(){
-    products.forEach(element => {catalogo.innerHTML = `<div><h4>${element.nombre}</h4><h5>$${element.precio}</h5><p>Incluye: ${element.contenido}</p></div>`
-    console.log (element)})}
+    for (let i = 0; i < products.length ; i++){
+        catalogo.innerHTML += `<div><h4>${products[i].nombre}</h4><h5>$${products[i].precio}</h5><p>Incluye: ${products[i].contenido}</p><a id="button">Agregar al carrito</a></div>`
+    }
+}
 
 generarCatalogo()
-
-//let titulo1 = document.getElementById("producto1-titulo")
-//titulo1.innerText = producto1.nombre
-
-//let titulo2 = document.getElementById("producto2-titulo")
-//titulo2.innerText = producto2.nombre
-
-//let titulo3 = document.getElementById("producto3-titulo")
-//titulo3.innerText = producto3.nombre
-
-//let precio1 = document.getElementById("producto1-precio")
-//precio1.innerText = producto1.precio
-
-//let precio2 = document.getElementById("producto2-precio")
-//precio2.innerText = producto2.precio
-
-//let precio3 = document.getElementById("producto3-precio")
-//precio3.innerText = producto3.precio
 
 let carritoContainer = document.getElementById("carrito")
 let carrito = localStorage.getItem("carrito").split(",")
 
-let boton1 = document.getElementById("button1")
-boton1.addEventListener("click", agregar1)
+let boton = document.getElementById("button")
+boton.addEventListener("click", agregar())
 
-function agregar1(){
-    carrito.push(producto1.nombre)
+function agregar(){
+    carrito.push(titulo.nombre)
     carritoContainer.innerText = carrito
     total = total + producto1.precio
     totalCarrito.innerText = "El total es: $"+ total 
