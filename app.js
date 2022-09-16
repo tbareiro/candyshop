@@ -5,6 +5,19 @@ function Productos(nombre, precio, contenido) {
     this.contenido = contenido;
 }
 
+const options = {
+	method: 'GET',
+	headers: {
+		'X-RapidAPI-Key': 'a0034ff20fmsh346839492325c73p1f1b02jsn2cac97c02de8',
+		'X-RapidAPI-Host': 'instagram47.p.rapidapi.com'
+	}
+};
+
+fetch('https://instagram47.p.rapidapi.com/public_user_posts?userid=1718924098', options)
+	.then(response => response.json())
+	.then(response => console.log(response))
+	.catch(err => console.error(err));
+
 localStorage.setItem("carrito", [])
 localStorage.setItem("descuentos", ["descuento1", "descuento2", "descuento3"])
 let total = 0
