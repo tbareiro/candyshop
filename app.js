@@ -1,47 +1,40 @@
 
-function Productos(product) {
-    this.nombre = product.nombre;
-    this.precio = product.precio;
-    this.contenido = product.contenido;
+function Productos(nombre, precio, contenido) {
+    this.nombre = nombre;
+    this.precio = precio;
+    this.contenido = contenido;
 }
-
-let producto1 = new Productos({nombre: "Bolsa de 800gr de chupetines", precio: 500, contenido: "800gr chupetines"})
-let producto2 = new Productos({nombre: "Mistery Candy Box", precio: 1190, contenido: "300gr chupetines, 500gr gomitas, 300gr caramelos masticables"})
-let producto3 = new Productos({nombre: "Bolsa de 600gr de gomitas", precio: 750, contenido: "600gr gomitas"})
 
 localStorage.setItem("carrito", [])
 localStorage.setItem("descuentos", ["descuento1", "descuento2", "descuento3"])
 let total = 0
 let totalCarrito = document.getElementById("total")
+let producto1 = new Productos("Bolsa de 800gr de chupetines", 500, "800gr chupetines")
+let producto2 = new Productos("Mistery Candy Box", 1190, "300gr chupetines, 500gr gomitas, 300gr caramelos masticables")
+let producto3 = new Productos("Bolsa de 600gr de gomitas", 750, "600gr gomitas")
+let producto4 = new Productos("Chocolate Cadbury", 590, "1 chocolate relleno frutilla 300gr")
+const products = [producto1, producto2, producto3, producto4]
+localStorage.setItem("products", products)
 
-let titulo1 = document.getElementById("producto1-titulo")
-titulo1.innerText = producto1.nombre
+let catalogo = document.getElementById("catalogo")
+function generarCatalogo(){
+    for (let i = 0; i < products.length ; i++){
+        catalogo.innerHTML += `<div><h4>${products[i].nombre}</h4><h5>$${products[i].precio}</h5><p>Incluye: ${products[i].contenido}</p><a id="button">Agregar al carrito</a></div>`
+    }
+}
 
-let titulo2 = document.getElementById("producto2-titulo")
-titulo2.innerText = producto2.nombre
-
-let titulo3 = document.getElementById("producto3-titulo")
-titulo3.innerText = producto3.nombre
-
-let precio1 = document.getElementById("producto1-precio")
-precio1.innerText = producto1.precio
-
-let precio2 = document.getElementById("producto2-precio")
-precio2.innerText = producto2.precio
-
-let precio3 = document.getElementById("producto3-precio")
-precio3.innerText = producto3.precio
+generarCatalogo()
 
 let carritoContainer = document.getElementById("carrito")
 let carrito = localStorage.getItem("carrito").split(",")
 
-let boton1 = document.getElementById("button1")
-boton1.addEventListener("click", agregar1)
+let boton = document.getElementById("button")
+boton.addEventListener("click", agregar())
 
-function agregar1(){
-    carrito.push(producto1.nombre)
+function agregar(){
+    carrito.push(products.nombre)
     carritoContainer.innerText = carrito
-    total = total + producto1.precio
+    total = total + products.precio
     totalCarrito.innerText = "El total es: $"+ total 
     Toastify({
         text: "Producto agregado al carrito!",
