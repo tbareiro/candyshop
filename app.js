@@ -32,9 +32,9 @@ let boton = document.getElementById("button")
 boton.addEventListener("click", agregar())
 
 function agregar(){
-    carrito.push(titulo.nombre)
+    carrito.push(products.nombre)
     carritoContainer.innerText = carrito
-    total = total + producto1.precio
+    total = total + products.precio
     totalCarrito.innerText = "El total es: $"+ total 
     Toastify({
         text: "Producto agregado al carrito!",
