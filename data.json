@@ -1,0 +1,34 @@
+{
+    "products": [
+        {
+            "id": 1,
+            "name": "Bolsa de 800gr de chupetines",
+            "price": 500, 
+            "contain": "800gr chupetines"
+        },
+        {
+            "id": 2,
+            "name": "Mistery Candy Box",
+            "price": 1190,
+            "contain": "300gr chupetines, 500gr gomitas, 300gr caramelos masticables"
+        },
+        {
+            "id": 3,
+            "name": "Bolsa de 600gr de gomitas",
+            "price": 750, 
+            "contain": "600gr gomitas"
+        },
+        {
+            "id": 4,
+            "name": "Chocolate Cadbury", 
+            "price": 590, 
+            "contain": "1 chocolate relleno frutilla 300gr"
+        },
+        {
+            "id": 5,
+            "name": "Chocolate Milka", 
+            "price": 430, 
+            "contain": "1 chocolate Milka 500gr"
+        }
+    ]
+}

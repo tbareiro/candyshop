@@ -5,44 +5,31 @@ function Productos(nombre, precio, contenido) {
     this.contenido = contenido;
 }
 
-const options = {
-	method: 'GET',
-	headers: {
-		'X-RapidAPI-Key': 'a0034ff20fmsh346839492325c73p1f1b02jsn2cac97c02de8',
-		'X-RapidAPI-Host': 'instagram47.p.rapidapi.com'
-	}
-};
+const lista = document.getElementById("lista")
 
-fetch('https://instagram47.p.rapidapi.com/public_user_posts?userid=1718924098', options)
-	.then(response => response.json())
-	.then(response => console.log(response))
-	.catch(err => console.error(err));
+fetch('/data.json')
+	.then((res) => res.json())
+	.then((data) => data.forEach(element => {
+        const li = document.createElement('li')
+        li.innerHTML = `
+            <h1>${element.products.name}</h1>
+            <h3>$${element.products.price}</h3>
+            <p>${element.products.contain}</p>
+        `
+        lista.append(li)
+    }))
+    .catch(console.log("error"))
 
 localStorage.setItem("carrito", [])
 localStorage.setItem("descuentos", ["descuento1", "descuento2", "descuento3"])
 let total = 0
 let totalCarrito = document.getElementById("total")
-let producto1 = new Productos("Bolsa de 800gr de chupetines", 500, "800gr chupetines")
-let producto2 = new Productos("Mistery Candy Box", 1190, "300gr chupetines, 500gr gomitas, 300gr caramelos masticables")
-let producto3 = new Productos("Bolsa de 600gr de gomitas", 750, "600gr gomitas")
-let producto4 = new Productos("Chocolate Cadbury", 590, "1 chocolate relleno frutilla 300gr")
-const products = [producto1, producto2, producto3, producto4]
-localStorage.setItem("products", products)
-
-let catalogo = document.getElementById("catalogo")
-function generarCatalogo(){
-    for (let i = 0; i < products.length ; i++){
-        catalogo.innerHTML += `<div><h4>${products[i].nombre}</h4><h5>$${products[i].precio}</h5><p>Incluye: ${products[i].contenido}</p><a id="button">Agregar al carrito</a></div>`
-    }
-}
-
-generarCatalogo()
 
 let carritoContainer = document.getElementById("carrito")
 let carrito = localStorage.getItem("carrito").split(",")
 
 let boton = document.getElementById("button")
-boton.addEventListener("click", agregar())
+//boton.addEventListener("click", agregar())
 
 function agregar(){
     carrito.push(products.nombre)
