@@ -9,15 +9,18 @@ const lista = document.getElementById("lista")
 
 fetch('/data.json')
 	.then((res) => res.json())
-	.then((data) => data.forEach(element => {
-        const li = document.createElement('li')
-        li.innerHTML = `
-            <h1>${element.products.name}</h1>
-            <h3>$${element.products.price}</h3>
-            <p>${element.products.contain}</p>
-        `
-        lista.append(li)
-    }))
+	.then((data) => {
+        for (var i = 0 ; i < data.length ; i++){
+            const li = document.createElement('li')
+            li.innerHTML += `
+                <h1>${data.products.name}</h1>
+                <h3>$${data.products.price}</h3>
+                <p>${data.products.contain}</p>
+            `
+            lista.append(li)
+        }
+        console.log(data)
+    })
     .catch(console.log("error"))
 
 localStorage.setItem("carrito", [])
