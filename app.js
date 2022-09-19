@@ -10,18 +10,17 @@ const lista = document.getElementById("lista")
 fetch('/data.json')
 	.then((res) => res.json())
 	.then((data) => {
-        for (var i = 0 ; i < data.length ; i++){
+        data.products.forEach(post => {
             const li = document.createElement('li')
-            li.innerHTML += `
-                <h1>${data.products.name}</h1>
-                <h3>$${data.products.price}</h3>
-                <p>${data.products.contain}</p>
+            li.innerHTML = `
+            <h2>${post.name}<h2>
+            <h3>$${post.price}</h3>
+            <p>${post.contain}</p>
+            <button>Agregar al carrito</button>
             `
             lista.append(li)
-        }
-        console.log(data)
+        })
     })
-    .catch(console.log("error"))
 
 localStorage.setItem("carrito", [])
 localStorage.setItem("descuentos", ["descuento1", "descuento2", "descuento3"])
