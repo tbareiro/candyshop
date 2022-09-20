@@ -1,9 +1,4 @@
-
-function Productos(nombre, precio, contenido) {
-    this.nombre = nombre;
-    this.precio = precio;
-    this.contenido = contenido;
-}
+//Catalogo
 
 const lista = document.getElementById("lista")
 
@@ -12,15 +7,26 @@ fetch('/data.json')
 	.then((data) => {
         data.products.forEach(post => {
             const li = document.createElement('li')
-            li.innerHTML = `
+            li.innerHTML += `
             <h2>${post.name}<h2>
             <h3>$${post.price}</h3>
             <p>${post.contain}</p>
-            <button>Agregar al carrito</button>
+            <button class="botones">Agregar al carrito</button>
             `
             lista.append(li)
         })
     })
+
+const botones = document.querySelectorAll("botones")
+const agregar = function () {
+    console.log("Recibido")
+}
+
+botones.forEach(boton => {
+    boton.addEventListener("click", agregar)
+})
+
+//Local Storage
 
 localStorage.setItem("carrito", [])
 localStorage.setItem("descuentos", ["descuento1", "descuento2", "descuento3"])
@@ -30,53 +36,8 @@ let totalCarrito = document.getElementById("total")
 let carritoContainer = document.getElementById("carrito")
 let carrito = localStorage.getItem("carrito").split(",")
 
-let boton = document.getElementById("button")
-//boton.addEventListener("click", agregar())
 
-function agregar(){
-    carrito.push(products.nombre)
-    carritoContainer.innerText = carrito
-    total = total + products.precio
-    totalCarrito.innerText = "El total es: $"+ total 
-    Toastify({
-        text: "Producto agregado al carrito!",
-        duration: 3000,
-        gravity: "bottom",
-        position: "right"
-    }).showToast()
-}
-
-let boton2 = document.getElementById("button2")
-boton2.addEventListener("click", agregar2)
-
-function agregar2(){
-    carrito.push(producto2.nombre)
-    Toastify({
-        text: "Producto agregado al carrito!",
-        duration: 1500,
-        gravity: "bottom",
-        position: "right"
-    }).showToast()
-    carritoContainer.innerText = carrito
-    total = total + producto2.precio
-    totalCarrito.innerText = "El total es: $"+ total 
-}
-
-let boton3 = document.getElementById("button3")
-boton3.addEventListener("click", agregar3)
-
-function agregar3(){
-    carrito.push(producto3.nombre)
-    Toastify({
-        text: "Producto agregado al carrito!",
-        duration: 1500,
-        gravity: "bottom",
-        position: "right"
-    }).showToast()
-    carritoContainer.innerText = carrito
-    total = total + producto3.precio
-    totalCarrito.innerText = "El total es: $"+ total 
-}
+//Funcionalidad codigo promo
 
 let codigo = document.getElementById("codigo")
 codigo.addEventListener("submit", codigoPromo)
@@ -96,6 +57,8 @@ function codigoPromo(e){
     })
     totalCarrito.innerText = "El total es: $" + total
 }
+
+//Funcionalidad costo envio
 
 let botonPago = document.getElementById("pago")
 botonPago.addEventListener("click", envio)
