@@ -11,20 +11,19 @@ fetch('/data.json')
             <h2>${post.name}<h2>
             <h3>$${post.price}</h3>
             <p>${post.contain}</p>
-            <button class="botones">Agregar al carrito</button>
             `
             lista.append(li)
+
+            let button = document.createElement("button")
+            button.innerText = "Agregar"
+
+            button.addEventListener("click", function(){
+                carrito.push(post.name)
+                carritoContainer.innerText = carrito
+            })
+            lista.append(button)
         })
     })
-
-const botones = document.querySelectorAll("botones")
-const agregar = function () {
-    console.log("Recibido")
-}
-
-botones.forEach(boton => {
-    boton.addEventListener("click", agregar)
-})
 
 //Local Storage
 
@@ -60,7 +59,7 @@ function codigoPromo(e){
 
 //Funcionalidad costo envio
 
-let botonPago = document.getElementById("pago")
+let botonPago = document.getElementById("envio")
 botonPago.addEventListener("click", envio)
 
 function envio(){
@@ -68,18 +67,26 @@ function envio(){
         title: "Error", 
         text: "No has agregado nada al carrito!",
         icon: "error",
-        confirmButtonText: "Ok"
+        button: "Ok"
     }) : (total <= 1999 ? (total = total + 300) && (swal({
         title: "Envío", 
         text: "Se sumaran $300 de envio. La compra minima para el envio gratis es de $1999.",
         icon: "info",
-        confirmButtonText: "Ok"
+        button: "Ok"
     })) : swal({
         title: "Envío gratis!", 
         text: "Perfecto! Contás con envío gratis!",
         icon: "success",
-        confirmButtonText: "Ok"
+        button: "Ok"
     }))
     textoEnvio = document.getElementById("costo-envio")
     totalCarrito.innerText = "El total es: $"+ total
 }
+
+//Funcionalidad Reset
+
+let botonReset = document.getElementById("reset")
+botonReset.addEventListener("click", function(){
+    carrito = []
+    carritoContainer.innerText = carrito
+})
