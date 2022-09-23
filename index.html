@@ -18,24 +18,26 @@
         </div>
     </header>
     <main>
+        <!--Catalogo-->
         <div class="container">
-            <div class="row justify-content-around">
-                <ul id="lista">
-                </ul>
+            <div><h1>Catalogo</h1></div>
+            <div class="row justify-content-around" id="lista">
             </div>
         </div>
         <div class="container">
             <div class="row justify-content-center">
+                <!--Codigo promocional-->
                 <div class="form col">
                     <form id="codigo">
                         <input type="text" placeholder="Insertar codigo promocional"><br><br>
-                        <input type="submit" value="Enviar">
+                        <input class="btn btn-primary btn-sm" type="submit" value="Enviar">
                     </form>
                 </div>
+                <!--Envio carrito-->
                 <div class="div-carrito col"><strong>Carrito</strong><p id="carrito"></p><p id="total">El total es: </p><p id="costo-envio"></p>
-                <button id="envio">Calcular Envio</button><button id="reset">Vaciar carrito</button></div>
-            </div>
-        </div>
+                    <button id="envio" class="btn btn-primary btn-sm">Calcular Envio</button><button id="reset" class="btn btn-primary btn-sm m-4">Vaciar carrito</button>
+                </div>
+            </div>            
     </main>
     <footer></footer>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>

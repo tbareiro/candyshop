@@ -1,30 +1,3 @@
-//Catalogo
-
-const lista = document.getElementById("lista")
-
-fetch('/data.json')
-	.then((res) => res.json())
-	.then((data) => {
-        data.products.forEach(post => {
-            const li = document.createElement('li')
-            li.innerHTML += `
-            <h2>${post.name}<h2>
-            <h3>$${post.price}</h3>
-            <p>${post.contain}</p>
-            `
-            lista.append(li)
-
-            let button = document.createElement("button")
-            button.innerText = "Agregar"
-
-            button.addEventListener("click", function(){
-                carrito.push(post.name)
-                carritoContainer.innerText = carrito
-            })
-            lista.append(button)
-        })
-    })
-
 //Local Storage
 
 localStorage.setItem("carrito", [])
@@ -34,6 +7,45 @@ let totalCarrito = document.getElementById("total")
 
 let carritoContainer = document.getElementById("carrito")
 let carrito = localStorage.getItem("carrito").split(",")
+
+//Catalogo
+
+const lista = document.getElementById("lista")
+
+fetch('/data.json')
+	.then((res) => res.json())
+	.then((data) => {
+        data.products.forEach(post => {
+            const div = document.createElement('div')
+            div.innerHTML += `
+            <h3>${post.name}<h3>
+            <h5>$${post.price}</h5>
+            <p>${post.contain}</p>
+            `
+            lista.append(div)
+            
+            div.className = "col-4"
+
+            let button = document.createElement("button")
+            button.innerText = "Agregar"
+
+            button.addEventListener("click", function(){
+                carrito.push(post.name)
+                carritoContainer.innerText = carrito
+                localStorage.setItem("carrito", carrito)
+                Toastify({
+
+                    text: "¡Producto añadido!",
+                    
+                    duration: 3000
+                    
+                    }).showToast();
+            })
+            div.append(button)
+
+            button.className = "btn btn-primary btn-sm"
+        })
+    })
 
 
 //Funcionalidad codigo promo
