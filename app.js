@@ -1,12 +1,12 @@
 //Local Storage
 
 localStorage.setItem("carrito", [])
-localStorage.setItem("descuentos", ["descuento1", "descuento2", "descuento3"])
+localStorage.setItem("descuentos", ["PROMO", "CODER", "CANDY"])
 let total = 0
 let totalCarrito = document.getElementById("total")
 
 let carritoContainer = document.getElementById("carrito")
-let carrito = localStorage.getItem("carrito").split(",")
+let carrito = localStorage.getItem("carrito")
 
 //Catalogo
 
@@ -61,7 +61,7 @@ function codigoPromo(e){
         title: "Descuento Válido", 
         text: "El código de descuento es válido! Tenés un 10% de descuento.",
         icon: "success",
-    }) : swal({
+    })  && (codigo.innerText = "¡Descuento aplicado!") : swal({
         title: "Error", 
         text: "El código de descuento no es válido.",
         icon: "error",
