@@ -1,12 +1,12 @@
 //Local Storage
 
-localStorage.setItem("carrito", [])
 localStorage.setItem("descuentos", ["PROMO", "CODER", "CANDY"])
 let total = 0
+const totalPrices = []
 let totalCarrito = document.getElementById("total")
 
 let carritoContainer = document.getElementById("carrito")
-let carrito = localStorage.getItem("carrito")
+let carrito = []
 
 //Catalogo
 
@@ -20,32 +20,37 @@ fetch('/data.json')
             div.innerHTML += `
             <h3>${post.name}<h3>
             <h5>$${post.price}</h5>
-            <p>${post.contain}</p>
+            <p>Contiene: ${post.contain}</p>
             `
             lista.append(div)
             
-            div.className = "col-4"
+            div.className = "col-3"
 
             let button = document.createElement("button")
             button.innerText = "Agregar"
 
-            button.addEventListener("click", function(){
+            button.addEventListener("click", () => {
                 carrito.push(post.name)
                 carritoContainer.innerText = carrito
-                localStorage.setItem("carrito", carrito)
                 Toastify({
-
                     text: "¡Producto añadido!",
-                    
                     duration: 3000
-                    
-                    }).showToast();
-            })
+                }).showToast()
+                sumaPrices()
+                })
+
             div.append(button)
 
             button.className = "btn btn-primary btn-sm"
         })
     })
+
+    function sumaPrices(){
+        for (let i = 0; i < totalPrices.length; i++) {
+            sum += totalPrices[i];
+        }
+        totalCarrito.innerText = "El total es: $" + sum
+    }
 
 
 //Funcionalidad codigo promo
@@ -101,4 +106,6 @@ let botonReset = document.getElementById("reset")
 botonReset.addEventListener("click", function(){
     carrito = []
     carritoContainer.innerText = carrito
+    total = 0
+    totalCarrito.innerText = "El total es: $" + total
 })
