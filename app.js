@@ -1,12 +1,10 @@
 //Local Storage
 
-localStorage.setItem("carrito", [])
 localStorage.setItem("descuentos", ["descuento1", "descuento2", "descuento3"])
 let total = 0
 let totalCarrito = document.getElementById("total")
 
 let carritoContainer = document.getElementById("carrito")
-let carrito = localStorage.getItem("carrito").split(",")
 
 //Catalogo
 
@@ -30,9 +28,11 @@ fetch('/data.json')
             button.innerText = "Agregar"
 
             button.addEventListener("click", function(){
-                carrito.push(post.name)
+                carrito.push(post)
                 carritoContainer.innerText = carrito
-                localStorage.setItem("carrito", carrito)
+                //total = total + post.price
+                //totalCarrito.innerText = "El total es: $" + total
+                
                 Toastify({
 
                     text: "¡Producto añadido!",
@@ -40,6 +40,8 @@ fetch('/data.json')
                     duration: 3000
                     
                     }).showToast();
+
+                cargarCarrito(carrito)
             })
             div.append(button)
 
@@ -47,6 +49,12 @@ fetch('/data.json')
         })
     })
 
+
+function cargarCarrito(c){
+    c.forEach((el)=>{
+        carritoContainer.innerHTML += `<p>${el.name}</p>`
+    })
+}
 
 //Funcionalidad codigo promo
 
