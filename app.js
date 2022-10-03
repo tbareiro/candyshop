@@ -2,7 +2,7 @@
 
 localStorage.setItem("descuentos", ["PROMO", "CODER", "CANDY"])
 let total = 0
-const totalPrices = []
+let totalPrices = []
 let totalCarrito = document.getElementById("total")
 
 let carritoContainer = document.getElementById("carrito")
@@ -30,18 +30,16 @@ fetch('/data.json')
             button.innerText = "Agregar"
 
             button.addEventListener("click", () => {
-                carrito.push(post)
+                carrito.push(post.name)
                 carritoContainer.innerText = carrito
-                //total = total + post.price
-                //totalCarrito.innerText = "El total es: $" + total
+                totalPrices.push(post.price)
+                console.log(totalPrices)
                 
                 Toastify({
                     text: "¡Producto añadido!",
                     duration: 3000
                 }).showToast()
-                sumaPrices()
-
-                cargarCarrito(carrito)
+                sumaPrice()
                 })
 
             div.append(button)
@@ -49,20 +47,16 @@ fetch('/data.json')
             button.className = "btn btn-primary btn-sm"
         })
     })
+    
+    let sum = 0
 
-    function sumaPrices(){
+    function sumaPrice(){
         for (let i = 0; i < totalPrices.length; i++) {
-            sum += totalPrices[i];
+            sum = totalPrices[i];
         }
         totalCarrito.innerText = "El total es: $" + sum
     }
 
-
-function cargarCarrito(c){
-    c.forEach((el)=>{
-        carritoContainer.innerHTML += `<p>${el.name}</p>`
-    })
-}
 
 //Funcionalidad codigo promo
 
@@ -117,6 +111,6 @@ let botonReset = document.getElementById("reset")
 botonReset.addEventListener("click", function(){
     carrito = []
     carritoContainer.innerText = carrito
-    total = 0
-    totalCarrito.innerText = "El total es: $" + total
+    totalPrices = []
+    sumaPrice()
 })
