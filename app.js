@@ -7,6 +7,7 @@ let totalCarrito = document.getElementById("total")
 
 let carritoContainer = document.getElementById("carrito")
 let carrito = []
+sumaPrice()
 
 //Catalogo
 
@@ -32,9 +33,7 @@ fetch('/data.json')
             button.addEventListener("click", () => {
                 carrito.push(post.name)
                 carritoContainer.innerText = carrito
-                totalPrices.push(post.price)
-                console.log(totalPrices)
-                
+                totalPrices.push(post.price)                
                 Toastify({
                     text: "¡Producto añadido!",
                     duration: 3000
@@ -48,13 +47,12 @@ fetch('/data.json')
         })
     })
     
-    let sum = 0
 
     function sumaPrice(){
-        for (let i = 0; i < totalPrices.length; i++) {
-            sum = totalPrices[i];
-        }
-        totalCarrito.innerText = "El total es: $" + sum
+        let botonPagar = document.getElementById("pago")
+        total = 0
+        totalPrices.forEach((i)=> total += i)
+        total == 0 ? (totalCarrito.innerText = "¡El carrito esta vacío!") : (totalCarrito.innerText = "El total es: $" + total) && (botonPagar.className = "btn btn-primary btn-sm m-4")
     }
 
 
@@ -84,25 +82,35 @@ function codigoPromo(e){
 let botonPago = document.getElementById("envio")
 botonPago.addEventListener("click", envio)
 
+let envioContainer = document.getElementById("costo-envio")
+
 function envio(){
-    total == 0 ? swal({
-        title: "Error", 
-        text: "No has agregado nada al carrito!",
-        icon: "error",
-        button: "Ok"
-    }) : (total <= 1999 ? (total = total + 300) && (swal({
-        title: "Envío", 
-        text: "Se sumaran $300 de envio. La compra minima para el envio gratis es de $1999.",
-        icon: "info",
-        button: "Ok"
-    })) : swal({
-        title: "Envío gratis!", 
-        text: "Perfecto! Contás con envío gratis!",
-        icon: "success",
-        button: "Ok"
-    }))
-    textoEnvio = document.getElementById("costo-envio")
-    totalCarrito.innerText = "El total es: $"+ total
+    let costoEnvio = 500
+    if(total == 0){
+        swal({
+            title: "Error", 
+            text: "No has agregado nada al carrito!",
+            icon: "error",
+            button: "Ok"
+        })
+    } else if (total <= 1999){
+        swal({
+            title: "Envío", 
+            text: "Se sumaran $"+ costoEnvio +" de envio. La compra minima para el envio gratis es de $1999.",
+            icon: "info",
+            button: "Ok"
+        })
+        envioContainer.innerText = `El costo de envío es de $${costoEnvio}.`
+    } else {
+        costoEnvio = 0
+        swal({
+            title: "Envío gratis!", 
+            text: "¡Perfecto! ¡Contás con envío gratis!",
+            icon: "success",
+            button: "Ok"
+        })
+        envioContainer.innerText = `¡Envío gratis!`
+    }
 }
 
 //Funcionalidad Reset
@@ -111,6 +119,7 @@ let botonReset = document.getElementById("reset")
 botonReset.addEventListener("click", function(){
     carrito = []
     carritoContainer.innerText = carrito
+    envioContainer.innerText = ""
     totalPrices = []
     sumaPrice()
 })
