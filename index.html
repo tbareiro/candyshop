@@ -33,11 +33,14 @@
                         <input class="btn btn-primary btn-sm" type="submit" value="Enviar">
                     </form>
                 </div>
-                <!--Envio / carrito-->
+                <!--Envio / carrito / boton de pago-->
                 <div class="div-carrito col"><strong>Carrito</strong><p id="carrito"></p><p id="total"></p><p id="costo-envio"></p>
                     <button id="envio" class="btn btn-primary btn-sm">Calcular Envio</button>
                     <button id="reset" class="btn btn-primary btn-sm m-4">Vaciar carrito</button>
-                    <button id="pago" class="btn btn-primary btn-sm m-4 disabled">Ir a pagar</button>
+                    <div>
+                        <p id="boton-pago"></p>
+                        <button id="pago" class="btn btn-primary btn-sm m-4 disabled">Ir a pagar</button>
+                    </div>
                 </div>
             </div>            
     </main>

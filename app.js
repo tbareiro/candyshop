@@ -50,9 +50,11 @@ fetch('/data.json')
 
     function sumaPrice(){
         let botonPagar = document.getElementById("pago")
+        let parrafoPagar = document.getElementById("boton-pago")
         total = 0
         totalPrices.forEach((i)=> total += i)
-        total == 0 ? (totalCarrito.innerText = "¡El carrito esta vacío!") : (totalCarrito.innerText = "El total es: $" + total) && (botonPagar.className = "btn btn-primary btn-sm m-4")
+        total == 0 ? (totalCarrito.innerText = "¡El carrito esta vacío!") && (botonPagar.className = "btn btn-primary btn-sm m-4 disabled") : (totalCarrito.innerText = "El total es: $" + total) && (botonPagar.className = "btn btn-primary btn-sm m-4") && (parrafoPagar.innerText = "Total a pagar: $" + total + costoEnvio )
+
     }
 
 
@@ -79,8 +81,8 @@ function codigoPromo(e){
 
 //Funcionalidad costo envio
 
-let botonPago = document.getElementById("envio")
-botonPago.addEventListener("click", envio)
+let botonEnvio = document.getElementById("envio")
+botonEnvio.addEventListener("click", envio)
 
 let envioContainer = document.getElementById("costo-envio")
 
