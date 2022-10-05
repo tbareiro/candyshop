@@ -2,10 +2,11 @@
 
 localStorage.setItem("descuentos", ["PROMO", "CODER", "CANDY"])
 let total = 0
+let costoEnvio = 500
 let totalPrices = []
-let totalCarrito = document.getElementById("total")
+const totalCarrito = document.getElementById("total")
 
-let carritoContainer = document.getElementById("carrito")
+const carritoContainer = document.getElementById("carrito")
 let carrito = []
 sumaPrice()
 
@@ -17,7 +18,7 @@ fetch('/data.json')
 	.then((res) => res.json())
 	.then((data) => {
         data.products.forEach(post => {
-            const div = document.createElement('div')
+            let div = document.createElement('div')
             div.innerHTML += `
             <h3>${post.name}<h3>
             <h5>$${post.price}</h5>
@@ -42,19 +43,16 @@ fetch('/data.json')
                 })
 
             div.append(button)
-
             button.className = "btn btn-primary btn-sm"
         })
     })
     
 
     function sumaPrice(){
-        let botonPagar = document.getElementById("pago")
-        let parrafoPagar = document.getElementById("boton-pago")
         total = 0
         totalPrices.forEach((i)=> total += i)
-        total == 0 ? (totalCarrito.innerText = "¡El carrito esta vacío!") && (botonPagar.className = "btn btn-primary btn-sm m-4 disabled") : (totalCarrito.innerText = "El total es: $" + total) && (botonPagar.className = "btn btn-primary btn-sm m-4") && (parrafoPagar.innerText = "Total a pagar: $" + total + costoEnvio )
-
+        total == 0 ? (totalCarrito.innerText = "¡El carrito esta vacío!") : (totalCarrito.innerText = "El total es: $" + total)
+        localStorage.setItem("carrito", carrito)
     }
 
 
@@ -71,12 +69,11 @@ function codigoPromo(e){
         title: "Descuento Válido", 
         text: "El código de descuento es válido! Tenés un 10% de descuento.",
         icon: "success",
-    })  && (codigo.innerText = "¡Descuento aplicado!") : swal({
+    })  && (codigo.innerText = "¡Descuento aplicado!") && (totalCarrito.innerText = "El total es: $" + total) : swal({
         title: "Error", 
         text: "El código de descuento no es válido.",
         icon: "error",
     })
-    totalCarrito.innerText = "El total es: $" + total
 }
 
 //Funcionalidad costo envio
@@ -87,7 +84,6 @@ botonEnvio.addEventListener("click", envio)
 let envioContainer = document.getElementById("costo-envio")
 
 function envio(){
-    let costoEnvio = 500
     if(total == 0){
         swal({
             title: "Error", 
@@ -103,6 +99,7 @@ function envio(){
             button: "Ok"
         })
         envioContainer.innerText = `El costo de envío es de $${costoEnvio}.`
+        printTotal()
     } else {
         costoEnvio = 0
         swal({
@@ -112,6 +109,31 @@ function envio(){
             button: "Ok"
         })
         envioContainer.innerText = `¡Envío gratis!`
+        printTotal()
+    }
+}
+
+//Funcion Totalidad y Boton Pagar
+
+function printTotal(){
+    let parrafoPagar = document.getElementById("boton-pago")
+    parrafoPagar.innerText = `Total a pagar: $${total + costoEnvio}`
+}
+
+let botonPagar = document.getElementById("pago")
+botonPagar.addEventListener("click", printPago)
+
+function printPago(){
+    if(total != 0){
+        let contenedorPrincipal = document.getElementById('main')
+        contenedorPrincipal.innerHTML = `
+            <div class="container">
+                <h3>Gracias por tu compra!<h3>
+                <h5>El total de tu compra es: $${total}</h5>
+                <strong>Incluye: ${carrito}</strong>
+                <p>Te enviaremos un mail con un link de pago para que puedas finalizar tu compra</p>
+            </div>
+        `
     }
 }
 
