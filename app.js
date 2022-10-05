@@ -130,7 +130,9 @@ function printPago(){
             <div class="container">
                 <h3>Gracias por tu compra!<h3>
                 <h5>El total de tu compra es: $${total}</h5>
-                <strong>Incluye: ${carrito}</strong>
+                <div id="div-pago">
+                    <strong>Incluye:</strong>${postPago()}
+                </div>
                 <p>Te enviaremos un mail con un link de pago para que puedas finalizar tu compra</p>
             </div>
         `
