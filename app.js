@@ -7,7 +7,7 @@ let totalPrices = []
 const totalCarrito = document.getElementById("total")
 
 const carritoContainer = document.getElementById("carrito")
-let carrito = []
+const carrito = []
 sumaPrice()
 
 //Catalogo
@@ -32,13 +32,14 @@ fetch('/data.json')
             button.innerText = "Agregar"
 
             button.addEventListener("click", () => {
-                carrito.push(post.name)
-                carritoContainer.innerText = carrito
+                carrito.push(post.name)         
+                localStorage.setItem("carrito", JSON.stringify(carrito))
                 totalPrices.push(post.price)                
                 Toastify({
                     text: "¡Producto añadido!",
                     duration: 3000
                 }).showToast()
+                printCarrito()
                 sumaPrice()
                 })
 
@@ -47,12 +48,16 @@ fetch('/data.json')
         })
     })
     
+    const carritoLocal = JSON.parse(localStorage.getItem("carrito"))
+
+    function printCarrito() {
+        carritoContainer.innerText = carritoLocal
+    }
 
     function sumaPrice(){
         total = 0
         totalPrices.forEach((i)=> total += i)
         total == 0 ? (totalCarrito.innerText = "¡El carrito esta vacío!") : (totalCarrito.innerText = "El total es: $" + total)
-        localStorage.setItem("carrito", carrito)
     }
 
 
@@ -109,15 +114,13 @@ function envio(){
             button: "Ok"
         })
         envioContainer.innerText = `¡Envío gratis!`
-        printTotal()
     }
 }
 
 //Funcion Totalidad y Boton Pagar
 
 function printTotal(){
-    let parrafoPagar = document.getElementById("boton-pago")
-    parrafoPagar.innerText = `Total a pagar: $${total + costoEnvio}`
+    total = total + costoEnvio
 }
 
 let botonPagar = document.getElementById("pago")
@@ -131,7 +134,7 @@ function printPago(){
                 <h3>Gracias por tu compra!<h3>
                 <h5>El total de tu compra es: $${total}</h5>
                 <div id="div-pago">
-                    <strong>Incluye:</strong>${postPago()}
+                    <strong>Incluye:</strong>${carrito}
                 </div>
                 <p>Te enviaremos un mail con un link de pago para que puedas finalizar tu compra</p>
             </div>
@@ -143,7 +146,10 @@ function printPago(){
 
 let botonReset = document.getElementById("reset")
 botonReset.addEventListener("click", function(){
-    carrito = []
+    while(carrito.length){
+        carrito.pop()
+    }
+    localStorage.setItem("carrito", JSON.stringify(carrito))
     carritoContainer.innerText = carrito
     envioContainer.innerText = ""
     totalPrices = []
